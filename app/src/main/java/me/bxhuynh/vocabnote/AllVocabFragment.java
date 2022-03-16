@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class AllVocabFragment extends Fragment {
     private RecyclerView allVocabRecyclerView;
     private ArrayList<WordModal> wordModalArrayList;
     private DBHandler dbHandler;
+    private SearchView searchView;
 
     public AllVocabFragment() {
         // Required empty public constructor
@@ -48,6 +50,21 @@ public class AllVocabFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         allVocabRecyclerView.setLayoutManager(linearLayoutManager);
         allVocabRecyclerView.setAdapter(vocabListViewAdapter);
+
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                vocabListViewAdapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                vocabListViewAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         //context menu register
         registerForContextMenu(allVocabRecyclerView);

@@ -2,12 +2,14 @@ package me.bxhuynh.vocabnote;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdapter.ViewHolder> {
     private ArrayList<WordModal> wordModalArrayList;
+    private ArrayList<WordModal> wordModalArrayListFiltered;
     private Context context;
     private  int position;
     private DBHandler dbHandler;
@@ -33,26 +37,57 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
 
     public VocabListViewAdapter(ArrayList<WordModal> wordModalArrayList, Context context) {
         this.wordModalArrayList = wordModalArrayList;
+        this.wordModalArrayListFiltered = wordModalArrayList;
         this.context = context;
+    }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String searchString = charSequence.toString();
+                if (searchString.isEmpty()) {
+                    wordModalArrayListFiltered = wordModalArrayList;
+                } else {
+                    ArrayList<WordModal> filtered = new ArrayList<>();
+                    for (WordModal row : wordModalArrayList) {
+                        if (row.getWord().toLowerCase().contains(searchString.toLowerCase()) ){
+                            filtered.add(row);
+                        }
+                    }
+                    wordModalArrayListFiltered = filtered;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = wordModalArrayListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                wordModalArrayListFiltered = (ArrayList<WordModal>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public void deleteItem() {
         dbHandler =  new DBHandler(context);
-        dbHandler.deleteWord(wordModalArrayList.get(position).getWord());
+        dbHandler.deleteWord(wordModalArrayListFiltered.get(position).getWord());
         wordModalArrayList = dbHandler.readWords(0);
+        wordModalArrayListFiltered.remove(position);
         notifyItemRemoved(position);
         Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
     }
 
     public void addToStudy() {
         dbHandler = new DBHandler(context);
-        WordModal word = wordModalArrayList.get(position);
+        WordModal word = wordModalArrayListFiltered.get(position);
         if (word.getIsStudying() == 1) {
             Toast.makeText(context, "This word is already in study list.", Toast.LENGTH_SHORT).show();
             return;
         }
         dbHandler.updateWord(word.getWord(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1);
-        wordModalArrayList.set(position, new WordModal(word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
+        wordModalArrayListFiltered.set(position, new WordModal(word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
         notifyItemChanged(position);
         Toast.makeText(context, word.getWord() + " is added to study", Toast.LENGTH_SHORT).show();
     }
@@ -75,7 +110,7 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     public void onBindViewHolder(@NonNull VocabListViewAdapter.ViewHolder holder, int position) {
         // on below line we are setting data
         // to our views of recycler view item.
-        WordModal modal = wordModalArrayList.get(position);
+        WordModal modal = wordModalArrayListFiltered.get(position);
         holder.tvWord.setText(modal.getWord());
         holder.tvSoundLike.setText(modal.getSoundlike());
         holder.tvMeaning.setText(modal.getMeaning());
@@ -101,7 +136,7 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     @Override
     public int getItemCount() {
         // returning the size of our array list
-        return wordModalArrayList.size();
+        return wordModalArrayListFiltered.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
