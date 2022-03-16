@@ -2,8 +2,12 @@ package me.bxhuynh.vocabnote;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "vocabDB";
@@ -46,6 +50,24 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(MEANING_COL, meaning);
         values.put(IS_STUDYING_COL, isStudying);
         db.insert(TABLE_NAME, null, values);
-//        db.close();
+        db.close();
+    }
+
+    public ArrayList<WordModal> readWords(int isStudying) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = "";
+        if (isStudying == 1) {
+            whereClause = " WHERE " + IS_STUDYING_COL +" = 1";
+        }
+        Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause, null);
+        ArrayList<WordModal> wordModalArrayList = new ArrayList<>();
+
+        if (cursorWords.moveToFirst()) {
+            do {
+                wordModalArrayList.add(new WordModal(cursorWords.getString(1), cursorWords.getString(3), cursorWords.getString(2), Integer.parseInt(cursorWords.getString(4))));
+            } while(cursorWords.moveToNext());
+        }
+        cursorWords.close();
+        return wordModalArrayList;
     }
 }

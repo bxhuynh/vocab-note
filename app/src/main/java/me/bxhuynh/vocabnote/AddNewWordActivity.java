@@ -13,7 +13,7 @@ public class AddNewWordActivity extends AppCompatActivity {
     EditText etWord, etSoundLike, etMeaning;
     CheckBox cbAddToStudy;
     private DBHandler dbHandler;
-
+    StudyingListViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class AddNewWordActivity extends AppCompatActivity {
     }
 
     public void onClickCancel(View v){
-        finish();
+        Intent i = new Intent(AddNewWordActivity.this, MainActivity.class);
+        startActivity(i);
     }
 }
