@@ -21,6 +21,7 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     private ArrayList<WordModal> wordModalArrayList;
     private Context context;
     private  int position;
+    private DBHandler dbHandler;
 
     public int getPosition( ) {
             return position;
@@ -33,6 +34,27 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     public VocabListViewAdapter(ArrayList<WordModal> wordModalArrayList, Context context) {
         this.wordModalArrayList = wordModalArrayList;
         this.context = context;
+    }
+
+    public void deleteItem() {
+        dbHandler =  new DBHandler(context);
+        dbHandler.deleteWord(wordModalArrayList.get(position).getWord());
+        wordModalArrayList = dbHandler.readWords(0);
+        notifyItemRemoved(position);
+        Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    public void addToStudy() {
+        dbHandler = new DBHandler(context);
+        WordModal word = wordModalArrayList.get(position);
+        if (word.getIsStudying() == 1) {
+            Toast.makeText(context, "This word is already in study list.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        dbHandler.updateWord(word.getWord(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1);
+        wordModalArrayList.set(position, new WordModal(word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
+        notifyItemChanged(position);
+        Toast.makeText(context, word.getWord() + " is added to study", Toast.LENGTH_SHORT).show();
     }
 
     @NonNull

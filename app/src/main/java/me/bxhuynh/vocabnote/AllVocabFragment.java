@@ -55,25 +55,16 @@ public class AllVocabFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int position = - 1;
-        try {
-            position = vocabListViewAdapter.getPosition();
-        } catch (Exception e)
-        {
-            Log.d("Error", e.getLocalizedMessage(), e);
-        }
 
         switch (item.getItemId()) {
             case R.id.ctx_add:
-                WordModal word = wordModalArrayList.get(position);
-                dbHandler.updateWord(word.getWord(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1);
-                Toast.makeText(getActivity(), word.getWord() + " is added to study", Toast.LENGTH_SHORT).show();
+                vocabListViewAdapter.addToStudy();
                 break;
             case R.id.ctx_edit:
-                Toast.makeText(getActivity(), "EDIT " + String.valueOf(position), Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.ctx_delete:
-                Toast.makeText(getActivity(), "DELETE " + String.valueOf(position), Toast.LENGTH_SHORT).show();
+                vocabListViewAdapter.deleteItem();
                 break;
         }
 
