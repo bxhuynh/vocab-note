@@ -10,4 +10,7 @@
     <string name="total">Total: </string>
     <string name="noOfStudying">Studying: </string>
     <string name="noOfStudied">Studied: </string>
+    <string name="ctx_Add">Add To Study</string>
+    <string name="ctx_Delete">Delete</string>
+    <string name="ctx_Edit">Edit</string>
 </resources>

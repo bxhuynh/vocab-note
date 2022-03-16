@@ -64,7 +64,7 @@ public class StudyingListViewAdapter extends RecyclerView.Adapter<StudyingListVi
             @Override
             public void onClick(View view) {
                 dbHandler.updateWord(tvWord.getText().toString(), tvWord.getText().toString(), tvSoundLike.getText().toString(), tvMeaning.getText().toString(), 0);
-                Toast.makeText(context.getApplicationContext(), "Remove from studying", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getApplicationContext(), "Word studied", Toast.LENGTH_SHORT).show();
                 wordModalArrayList = dbHandler.readWords(1);
                 notifyDataSetChanged();
             }

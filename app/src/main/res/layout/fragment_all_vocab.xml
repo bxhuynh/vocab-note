@@ -11,7 +11,7 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tertiary"
+        android:background="@color/secondary"
         android:iconifiedByDefault="false"
         android:queryHint="@string/search_hints"
         app:layout_constraintBottom_toTopOf="@+id/allVocabRecyclerView"
@@ -23,7 +23,7 @@
         android:id="@+id/allVocabRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
+        android:paddingTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:layout_editor_absoluteX="411dp" />

@@ -1,11 +1,16 @@
 package me.bxhuynh.vocabnote;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +20,15 @@ import java.util.ArrayList;
 public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdapter.ViewHolder> {
     private ArrayList<WordModal> wordModalArrayList;
     private Context context;
+    private  int position;
+
+    public int getPosition( ) {
+            return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public VocabListViewAdapter(ArrayList<WordModal> wordModalArrayList, Context context) {
         this.wordModalArrayList = wordModalArrayList;
@@ -30,6 +44,12 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     }
 
     @Override
+    public void onViewRecycled(ViewHolder holder) {
+        holder.itemView.setOnLongClickListener(null);
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull VocabListViewAdapter.ViewHolder holder, int position) {
         // on below line we are setting data
         // to our views of recycler view item.
@@ -39,9 +59,21 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
         holder.tvMeaning.setText(modal.getMeaning());
         if (modal.getIsStudying() == 0) {
             holder.imgStudying.setVisibility(View.INVISIBLE);
+            holder.itemView.setBackgroundColor(context.getColor(R.color.white));
         } else {
             holder.imgStudying.setVisibility(View.VISIBLE);
+            holder.itemView.setBackgroundColor(context.getColor(R.color.tertiary));
         }
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                setPosition(holder.getLayoutPosition());
+                holder.itemView.setBackgroundColor(context.getColor(R.color.tertiary_dark));
+                return false;
+            }
+
+        });
     }
 
     @Override
@@ -63,6 +95,19 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
             tvSoundLike = itemView.findViewById(R.id.soundLike);
             tvMeaning = itemView.findViewById(R.id.meaning);
             imgStudying = itemView.findViewById(R.id.imageStudying);
+
+            itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                    contextMenu.add(Menu.NONE, R.id.ctx_add,
+                            Menu.NONE, R.string.ctx_Add);
+                    contextMenu.add(Menu.NONE, R.id.ctx_edit, Menu.NONE, R.string.ctx_Edit);
+                    contextMenu.add(Menu.NONE, R.id.ctx_delete,
+                            Menu.NONE, R.string.ctx_Delete);
+
+                }
+            });
         }
+
     }
 }
