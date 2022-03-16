@@ -70,4 +70,14 @@ public class DBHandler extends SQLiteOpenHelper {
         cursorWords.close();
         return wordModalArrayList;
     }
+
+    public void updateWord(String originalWord, String word, String soundlike, String meaning, int isStudying ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(WORD_COL, word);
+        values.put(SOUND_LIKE_COL, soundlike);
+        values.put(MEANING_COL, meaning);
+        values.put(IS_STUDYING_COL, isStudying);
+        db.update(TABLE_NAME, values, WORD_COL + "=?", new String[]{originalWord} );
+    }
 }

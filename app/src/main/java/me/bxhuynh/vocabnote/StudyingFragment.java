@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -51,8 +52,6 @@ public class StudyingFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         studyingListView.setLayoutManager(linearLayoutManager);
-
-
         studyingListView.setAdapter(studyingListViewAdapter);
 
         fab = view.findViewById(R.id.floatingActionButton);
