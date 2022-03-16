@@ -4,4 +4,6 @@
     <string name="nav_all_vocab">All Vocab</string>
     <string name="nav_statistics">Statistics</string>
     <string name="search_hints">Search...</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_new_word">Add New Word</string>
 </resources>

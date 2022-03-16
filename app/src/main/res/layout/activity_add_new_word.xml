@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addNewContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".AddNewWordActivity">
+
+    <EditText
+        android:id="@+id/et_word"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:hint="Enter your new word"
+        android:inputType="textPersonName"
+        android:textColorLink="@color/tertiary_dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_soundLike"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_soundLike"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:hint="How the word sounds like?"
+        android:inputType="textPersonName"
+        android:textColorLink="@color/tertiary_dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_meaning"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_word" />
+
+    <EditText
+        android:id="@+id/et_meaning"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:hint="Word's meaning"
+        android:inputType="textPersonName"
+        android:textColorLink="@color/tertiary_dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/cb_addToStudying"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_soundLike" />
+
+    <CheckBox
+        android:id="@+id/cb_addToStudying"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/primary"
+        android:checked="true"
+        android:text="Add to study"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_meaning" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onAdd"
+        android:text="@string/add_new_word"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_addToStudying" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:onClick="onClickCancel"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSave"
+        app:layout_constraintEnd_toStartOf="@+id/btnSave"
+        app:layout_constraintTop_toBottomOf="@+id/cb_addToStudying"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
