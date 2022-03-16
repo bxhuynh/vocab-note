@@ -2,11 +2,17 @@ package me.bxhuynh.vocabnote;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +20,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class AllVocabFragment extends Fragment {
+    private VocabListViewAdapter vocabListViewAdapter;
+    private RecyclerView allVocabRecyclerView;
+    private ArrayList<WordModal> wordModalArrayList;
+    private DBHandler dbHandler;
+
     public AllVocabFragment() {
         // Required empty public constructor
     }
@@ -23,5 +34,21 @@ public class AllVocabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_vocab, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //get data from db
+        wordModalArrayList = new ArrayList<>();
+        dbHandler = new DBHandler(getActivity());
+        wordModalArrayList = dbHandler.readWords(0);
+        //init adapter n get recyclerview
+        vocabListViewAdapter = new VocabListViewAdapter(wordModalArrayList, getActivity());
+        allVocabRecyclerView = view.findViewById(R.id.allVocabRecyclerView);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        allVocabRecyclerView.setLayoutManager(linearLayoutManager);
+        allVocabRecyclerView.setAdapter(vocabListViewAdapter);
     }
 }
