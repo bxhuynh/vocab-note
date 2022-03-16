@@ -11,4 +11,8 @@
     <color name="secondary">#FFC1DEAE</color>
     <color name="tertiary">#FFF2F5C8</color>
     <color name="tertiary_dark">#FFE8E8A6</color>
+    <color name="peach">#FFFFB2A6</color>
+    <color name="yellow">#FFFFF89A</color>
+    <color name="blue">#FF9ADCFF</color>
+    <color name="pink">#FFFF8AAE</color>
 </resources>

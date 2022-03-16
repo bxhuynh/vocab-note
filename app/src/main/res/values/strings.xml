@@ -6,4 +6,8 @@
     <string name="search_hints">Search...</string>
     <string name="cancel">Cancel</string>
     <string name="add_new_word">Add New Word</string>
+    <string name="statistics_title">Number of Words</string>
+    <string name="total">Total: </string>
+    <string name="noOfStudying">Studying: </string>
+    <string name="noOfStudied">Studied: </string>
 </resources>

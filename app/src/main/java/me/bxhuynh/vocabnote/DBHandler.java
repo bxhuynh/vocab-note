@@ -80,4 +80,14 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(IS_STUDYING_COL, isStudying);
         db.update(TABLE_NAME, values, WORD_COL + "=?", new String[]{originalWord} );
     }
+
+    public int getCountWords(boolean studying) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String whereClause = "";
+        if (studying) {
+            whereClause = " WHERE " + IS_STUDYING_COL +" = 1";
+        }
+        Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause, null);
+        return cursorWords.getCount();
+    }
 }
