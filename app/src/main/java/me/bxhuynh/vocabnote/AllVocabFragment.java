@@ -1,5 +1,6 @@
 package me.bxhuynh.vocabnote;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,7 +79,7 @@ public class AllVocabFragment extends Fragment {
                 vocabListViewAdapter.addToStudy();
                 break;
             case R.id.ctx_edit:
-
+                vocabListViewAdapter.editWord();
                 break;
             case R.id.ctx_delete:
                 vocabListViewAdapter.deleteItem();

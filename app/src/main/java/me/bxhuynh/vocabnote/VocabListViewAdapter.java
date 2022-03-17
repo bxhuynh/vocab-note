@@ -1,6 +1,7 @@
 package me.bxhuynh.vocabnote;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -87,9 +88,20 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
             return;
         }
         dbHandler.updateWord(word.getWord(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1);
-        wordModalArrayListFiltered.set(position, new WordModal(word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
+        wordModalArrayListFiltered.set(position, new WordModal(word.getId(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
         notifyItemChanged(position);
         Toast.makeText(context, word.getWord() + " is added to study", Toast.LENGTH_SHORT).show();
+    }
+
+    public void editWord() {
+        WordModal word = wordModalArrayListFiltered.get(position);
+        Intent i = new Intent(context, EditWordActivity.class);
+        i.putExtra("WORD_ID", String.valueOf(word.getId()));
+        i.putExtra("WORD", word.getWord());
+        i.putExtra("SOUNDLIKE", word.getSoundlike());
+        i.putExtra("MEANING", word.getMeaning());
+        i.putExtra("ISSTUDYING", String.valueOf(word.getIsStudying()));
+        context.startActivity(i);
     }
 
     @NonNull

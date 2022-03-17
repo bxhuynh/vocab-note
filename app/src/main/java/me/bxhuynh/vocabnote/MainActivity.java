@@ -42,7 +42,31 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        bottomNavigationView.setSelectedItemId(R.id.navigation_studying);
+
+        try {
+            String intentFragment = "";
+            if (savedInstanceState == null) {
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    intentFragment = extras.getString("fragmentToLoad");
+                }
+            } else {
+                intentFragment = (String) savedInstanceState.getSerializable("fragmentToLoad");
+            }
+            switch (intentFragment) {
+                case "ALL":
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_all);
+                    break;
+                case "STATISTICS":
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_statistics);
+                    break;
+                default:
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_studying);
+            }
+        } catch (Exception e) {
+            bottomNavigationView.setSelectedItemId(R.id.navigation_studying);
+        }
+
     }
 
 }

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VocabNote">
         <activity
+            android:name=".EditWordActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddNewWordActivity"
             android:exported="false" />
         <activity

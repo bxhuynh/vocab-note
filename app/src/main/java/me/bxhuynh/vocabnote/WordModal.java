@@ -7,7 +7,8 @@ public class WordModal {
     private int id;
     private int isStudying;
 
-    public WordModal(String word, String soundlike, String meaning, int isStudying) {
+    public WordModal(int id, String word, String soundlike, String meaning, int isStudying) {
+        this.id = id;
         this.word = word;
         this.soundlike = soundlike;
         this.meaning = meaning;

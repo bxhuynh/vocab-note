@@ -13,4 +13,5 @@
     <string name="ctx_Add">Add To Study List</string>
     <string name="ctx_Delete">Delete</string>
     <string name="ctx_Edit">Edit</string>
+    <string name="save">Save</string>
 </resources>

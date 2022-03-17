@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -59,12 +58,12 @@ public class DBHandler extends SQLiteOpenHelper {
         if (isStudying == 1) {
             whereClause = " WHERE " + IS_STUDYING_COL +" = 1";
         }
-        Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause, null);
+        Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause + " ORDER BY " + WORD_COL, null);
         ArrayList<WordModal> wordModalArrayList = new ArrayList<>();
 
         if (cursorWords.moveToFirst()) {
             do {
-                wordModalArrayList.add(new WordModal(cursorWords.getString(1), cursorWords.getString(3), cursorWords.getString(2), Integer.parseInt(cursorWords.getString(4))));
+                wordModalArrayList.add(new WordModal(cursorWords.getInt(0), cursorWords.getString(1), cursorWords.getString(3), cursorWords.getString(2), Integer.parseInt(cursorWords.getString(4))));
             } while(cursorWords.moveToNext());
         }
         cursorWords.close();
@@ -80,6 +79,17 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(MEANING_COL, meaning);
         values.put(IS_STUDYING_COL, isStudying);
         db.update(TABLE_NAME, values, WORD_COL + "=?", new String[]{originalWord} );
+        db.close();
+    }
+
+    public void updateWordById(String id, String word, String soundlike, String meaning, int isStudying ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(WORD_COL, word);
+        values.put(SOUND_LIKE_COL, soundlike);
+        values.put(MEANING_COL, meaning);
+        values.put(IS_STUDYING_COL, isStudying);
+        db.update(TABLE_NAME, values, ID_COL + "=?", new String[]{id} );
         db.close();
     }
 

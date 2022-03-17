@@ -19,10 +19,10 @@ public class AddNewWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_word);
 
-        etWord = findViewById(R.id.et_word);
-        etSoundLike = findViewById(R.id.et_soundLike);
-        etMeaning = findViewById(R.id.et_meaning);
-        cbAddToStudy = findViewById(R.id.cb_addToStudying);
+        etWord = findViewById(R.id.et_editWord);
+        etSoundLike = findViewById(R.id.et_editSoundLike);
+        etMeaning = findViewById(R.id.et_editMeaning);
+        cbAddToStudy = findViewById(R.id.cb_editAddToStudying);
 
         dbHandler = new DBHandler(AddNewWordActivity.this);
 
