@@ -63,4 +63,10 @@ public class StudyingFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onDestroy() {
+        dbHandler.close();
+        super.onDestroy();
+    }
 }

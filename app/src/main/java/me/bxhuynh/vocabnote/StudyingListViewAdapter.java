@@ -33,8 +33,6 @@ public class StudyingListViewAdapter extends RecyclerView.Adapter<StudyingListVi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // on below line we are setting data
-        // to our views of recycler view item.
         WordModal modal = wordModalArrayList.get(position);
         holder.tvWord.setText(modal.getWord());
         holder.tvSoundLike.setText(modal.getSoundlike());
@@ -43,19 +41,15 @@ public class StudyingListViewAdapter extends RecyclerView.Adapter<StudyingListVi
 
     @Override
     public int getItemCount() {
-        // returning the size of our array list
         return wordModalArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        // creating variables for our text views.
-        private TextView tvWord, tvSoundLike, tvMeaning;
+         private TextView tvWord, tvSoundLike, tvMeaning;
         private Button btnCheck;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing our text views
             tvWord = itemView.findViewById(R.id.word);
             tvSoundLike = itemView.findViewById(R.id.soundLike);
             tvMeaning = itemView.findViewById(R.id.meaning);

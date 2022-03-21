@@ -108,7 +108,6 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
     @Override
     public VocabListViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vocab_item, parent, false);
-
         return new VocabListViewAdapter.ViewHolder(view);
     }
 
@@ -120,12 +119,12 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull VocabListViewAdapter.ViewHolder holder, int position) {
-        // on below line we are setting data
-        // to our views of recycler view item.
         WordModal modal = wordModalArrayListFiltered.get(position);
         holder.tvWord.setText(modal.getWord());
         holder.tvSoundLike.setText(modal.getSoundlike());
         holder.tvMeaning.setText(modal.getMeaning());
+
+        //if the word is being studied, display it with background tertiary and learn icon
         if (modal.getIsStudying() == 0) {
             holder.imgStudying.setVisibility(View.INVISIBLE);
             holder.itemView.setBackgroundColor(context.getColor(R.color.white));
@@ -134,6 +133,7 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
             holder.itemView.setBackgroundColor(context.getColor(R.color.tertiary));
         }
 
+        //listener to set different background color (dark) for selected word by long click
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -147,19 +147,15 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
 
     @Override
     public int getItemCount() {
-        // returning the size of our array list
         return wordModalArrayListFiltered.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        // creating variables for our text views.
         private TextView tvWord, tvSoundLike, tvMeaning;
         private ImageView imgStudying;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing our text views
             tvWord = itemView.findViewById(R.id.word);
             tvSoundLike = itemView.findViewById(R.id.soundLike);
             tvMeaning = itemView.findViewById(R.id.meaning);

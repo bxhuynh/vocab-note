@@ -49,7 +49,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(MEANING_COL, meaning);
         values.put(IS_STUDYING_COL, isStudying);
         db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 
     public ArrayList<WordModal> readWords(int isStudying) {
@@ -67,7 +66,6 @@ public class DBHandler extends SQLiteOpenHelper {
             } while(cursorWords.moveToNext());
         }
         cursorWords.close();
-        db.close();
         return wordModalArrayList;
     }
 
@@ -79,7 +77,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(MEANING_COL, meaning);
         values.put(IS_STUDYING_COL, isStudying);
         db.update(TABLE_NAME, values, WORD_COL + "=?", new String[]{originalWord} );
-        db.close();
     }
 
     public void updateWordById(String id, String word, String soundlike, String meaning, int isStudying ) {
@@ -90,7 +87,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(MEANING_COL, meaning);
         values.put(IS_STUDYING_COL, isStudying);
         db.update(TABLE_NAME, values, ID_COL + "=?", new String[]{id} );
-        db.close();
     }
 
     public int getCountWords(boolean studying) {
@@ -101,13 +97,11 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause, null);
         int count  = cursorWords.getCount();
-        db.close();
         return count;
     }
 
     public void deleteWord(String word) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, WORD_COL+"=?", new String[]{word});
-        db.close();
     }
 }

@@ -68,7 +68,7 @@ public class StatisticsFragment extends Fragment {
         pieChart.addPieSlice(
                 new PieModel(
                         "Studied",
-                        total,
+                        total - st,
                         getResources().getColor(R.color.blue, getActivity().getTheme()) ));
         pieChart.setInnerPadding(40);
     }
