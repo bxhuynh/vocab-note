@@ -47,7 +47,7 @@
         android:layout_marginBottom="4dp"
         android:ems="10"
         android:hint="Word's meaning"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:textColorLink="@color/tertiary_dark"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/cb_editAddToStudying"
@@ -90,4 +90,5 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSave"
         app:layout_constraintTop_toBottomOf="@+id/cb_editAddToStudying"
         app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
