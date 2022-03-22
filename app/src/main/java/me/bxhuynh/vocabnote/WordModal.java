@@ -6,13 +6,18 @@ public class WordModal {
     private String soundlike;
     private int id;
     private int isStudying;
+    private  int createdDate;
+    private int createdYear;
 
-    public WordModal(int id, String word, String soundlike, String meaning, int isStudying) {
+
+    public WordModal(int id, String word, String soundlike, String meaning, int isStudying, int createdDate, int createdYear) {
         this.id = id;
         this.word = word;
         this.soundlike = soundlike;
         this.meaning = meaning;
         this.isStudying = isStudying;
+        this.createdDate = createdDate;
+        this.createdYear = createdYear;
     }
 
     public String getWord() {
@@ -53,5 +58,22 @@ public class WordModal {
 
     public void setIsStudying(int isStudying) {
         this.isStudying = isStudying;
+    }
+
+
+    public int getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(int createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public int getCreatedYear() {
+        return createdYear;
+    }
+
+    public void setCreatedYear(int createdYear) {
+        this.createdYear = createdYear;
     }
 }

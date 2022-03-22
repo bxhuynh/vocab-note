@@ -88,7 +88,8 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
             return;
         }
         dbHandler.updateWord(word.getWord(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1);
-        wordModalArrayListFiltered.set(position, new WordModal(word.getId(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1));
+        wordModalArrayListFiltered.set(position,
+                new WordModal(word.getId(), word.getWord(), word.getSoundlike(), word.getMeaning(), 1, word.getCreatedDate(), word.getCreatedYear()));
         notifyItemChanged(position);
         Toast.makeText(context, word.getWord() + " is added to study", Toast.LENGTH_SHORT).show();
     }
