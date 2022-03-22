@@ -89,4 +89,10 @@ public class EditWordActivity extends AppCompatActivity {
             Log.d("ERROR EDIT", e.getLocalizedMessage(), e);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        dbHandler.close();
+        super.onDestroy();
+    }
 }

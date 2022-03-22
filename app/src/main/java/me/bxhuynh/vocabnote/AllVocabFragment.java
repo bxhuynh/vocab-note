@@ -88,4 +88,10 @@ public class AllVocabFragment extends Fragment {
 
         return super.onContextItemSelected(item);
     }
+
+    @Override
+    public void onDestroy() {
+        dbHandler.close();
+        super.onDestroy();
+    }
 }
