@@ -120,4 +120,28 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, WORD_COL+"=?", new String[]{word});
     }
+
+    public ArrayList<StudiedWordsStatistic> getStatistics() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<StudiedWordsStatistic> arr = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        int currentMonth = date.getMonthValue(), currentYear = date.getYear();
+        int count = 0;
+        while (count < 6) {
+            String whereClause = " WHERE " + CREATED_MONTH +" = " + currentMonth + " AND " + CREATED_YEAR + " = " + currentYear;
+            Cursor cursorWords = db.rawQuery("SELECT * FROM " + TABLE_NAME + whereClause, null);
+            int total = cursorWords.getCount();
+            arr.add(new StudiedWordsStatistic(currentMonth, currentYear, total));
+
+            if (currentMonth - 1 > 0) {
+                currentMonth = currentMonth - 1;
+            } else {
+                currentMonth = 12;
+                currentYear = currentYear - 1;
+            }
+            count = count + 1;
+        }
+        return arr;
+    }
+
 }

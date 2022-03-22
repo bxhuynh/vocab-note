@@ -14,4 +14,5 @@
     <string name="ctx_Delete">Delete</string>
     <string name="ctx_Edit">Edit</string>
     <string name="save">Save</string>
+    <string name="learning_chart">Learning Progress Chart</string>
 </resources>

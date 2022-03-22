@@ -142,7 +142,6 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
                 holder.itemView.setBackgroundColor(context.getColor(R.color.tertiary_dark));
                 return false;
             }
-
         });
     }
 
@@ -173,6 +172,7 @@ public class VocabListViewAdapter extends RecyclerView.Adapter<VocabListViewAdap
 
                 }
             });
+
         }
 
     }
