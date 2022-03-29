@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     StudyingFragment studyingFragment = new StudyingFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
     AllVocabFragment allVocabFragment = new AllVocabFragment();
+    CloudFragment cloudFragment = new CloudFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_statistics:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, statisticsFragment).commit();
                         return true;
+
+                    case R.id.navigation_cloud:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, cloudFragment).commit();
+                        return true;
                 }
                 return true;
             }
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "STATISTICS":
                     bottomNavigationView.setSelectedItemId(R.id.navigation_statistics);
+                    break;
+                case "CLOUD":
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_cloud);
                     break;
                 default:
                     bottomNavigationView.setSelectedItemId(R.id.navigation_studying);
