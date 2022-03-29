@@ -3,6 +3,7 @@
     <string name="nav_studying">Studying</string>
     <string name="nav_all_vocab">All Vocab</string>
     <string name="nav_statistics">Statistics</string>
+    <string name="nav_cloud">Cloud Sync</string>
     <string name="search_hints">Search...</string>
     <string name="cancel">Cancel</string>
     <string name="add_new_word">Add New Word</string>
@@ -15,4 +16,6 @@
     <string name="ctx_Edit">Edit</string>
     <string name="save">Save</string>
     <string name="learning_chart">Learning Progress Chart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -16,4 +16,9 @@
         android:icon="@drawable/outline_analytics_24"
         android:title="@string/nav_statistics" />
 
+    <item
+        android:id="@+id/navigation_cloud"
+        android:icon="@drawable/baseline_cloud_sync_24"
+        android:title="@string/nav_cloud" />
+
 </menu>
