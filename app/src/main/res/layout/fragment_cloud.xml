@@ -3,12 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".CloudFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btnSaveToCloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save to cloud" />
+
+            <Button
+                android:id="@+id/btnImportFromCloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Import from cloud" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

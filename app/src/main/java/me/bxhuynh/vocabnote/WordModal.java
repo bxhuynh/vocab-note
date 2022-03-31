@@ -9,6 +9,9 @@ public class WordModal {
     private  int createdDate;
     private int createdYear;
 
+    public WordModal() {
+
+    }
 
     public WordModal(int id, String word, String soundlike, String meaning, int isStudying, int createdDate, int createdYear) {
         this.id = id;
